@@ -3661,3 +3661,16 @@ a.button2 {
     width: 30%;
 }
 }
+.ced {
+  color :#e7663f;
+  text-shadow: 2px 2px 2px black;
+}
+.host {
+  color :#585CA7;
+   text-shadow: 2px 2px 2px black;
+}
+.host:hover {
+  color:#e7663f;
+  text-shadow: 2px 2px 2px black;
+}
+
