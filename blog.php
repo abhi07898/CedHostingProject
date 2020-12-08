@@ -1,4 +1,5 @@
-<?php include'header.php';?>
+<?php if($menu="blog"); 
+include'header.php';?>
 	<!---header--->
 		<!---blog--->
 				<div class="content">

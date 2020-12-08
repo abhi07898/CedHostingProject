@@ -1,4 +1,7 @@
-<?php include 'header.php';?>
+<?php 
+if($menu="cmshosting");
+include 'header.php';?>
+
 	<!---header--->
 		<!---singleblog--->
 				<div class="content">

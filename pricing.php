@@ -1,4 +1,6 @@
-<?php include 'header.php';?>
+<?php 
+if($menu='pricing');
+include 'header.php';?>
 	<!---header--->
 		<!---prices--->
 				<div class="content">

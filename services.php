@@ -1,4 +1,5 @@
-<?php include 'header.php';?>
+<?php if($menu="services"); 
+include 'header.php';?>
 	<!---header--->
 		<!--services--->
 				<div class="content">

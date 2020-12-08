@@ -1,4 +1,6 @@
-<?php include 'header.php';?>
+<?php 
+if($menu='single')
+include 'header.php';?>
 	<!---header--->
 		<!---singleblog--->
 				<div class="content">

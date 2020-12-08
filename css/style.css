@@ -19,6 +19,13 @@ input[type="button"]{
 	-o-transition:0.5s all;
 	-ms-transition:0.5s all;
 }
+#sec_que{
+	border: 1px solid #555;
+    outline-color: #FD9F3E;
+    width: 96%;
+    font-size: 1em;
+    padding: 0.5em;
+}
 
 h1,h2,h3,h4,h5,h6{
 	padding:0 0;

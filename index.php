@@ -1,4 +1,8 @@
-<?php include 'header.php'
+<?php
+session_start();
+echo $_SESSION['user']['name']; 
+echo $_SESSION['user']['email']; 
+if($menu="index");include 'header.php'
 ?>
 	<!---banner--->
 		<div class="banner">
@@ -10,7 +14,7 @@
 					<div class="col-md-6 banner-grid">
 						<h3>Unlimited Web Hosting</h3>
 						<p>this hero area to show off some of your nice work. You can even have a video inside it since it’s great as a secondary call to action alongside this button underneath this text.</p>
-						<a href="single.html" class="button">get started</a>
+						<a href="single.php" class="button">get started</a>
 					</div>
 					<div class="clearfix"></div>
 				</div>

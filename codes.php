@@ -1,4 +1,6 @@
-<?php include 'header.php';?>
+<?php 
+if($menu="codes");
+include 'header.php';?>
 	<!---header--->
 	<!-- typography -->
 	<div class="content">

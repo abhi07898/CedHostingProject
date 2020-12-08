@@ -1,4 +1,6 @@
-<?php include 'header.php';?>
+<?php 
+if($menu='wordpresshosting')
+include 'header.php';?>
 	<!---header--->
 		<!---singleblog--->
 				<div class="content">

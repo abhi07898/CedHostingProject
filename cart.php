@@ -1,3 +1,5 @@
-<?php include'header.php';?>
-isdjg
+<?php 
+if($menu='cart');
+include'header.php';?>
+
 <?php include'footer.php';?>

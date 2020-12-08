@@ -1,4 +1,5 @@
 <?php 
+if($menu="about");
 include 'header.php';
 ?>	<!---header--->
 		<!--about--->
