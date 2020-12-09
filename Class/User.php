@@ -12,7 +12,7 @@ class User {
             $output =  "New record created successfully";
           } else {
             // $output =  "Error: " . $query . "<br>" . $this->data->error;
-            $output = "User with this E-mail is Already Exists";
+            $output = "User with this E-mail/Contact_No is Already Exists";
           }
           return $output;
     }
@@ -27,11 +27,17 @@ class User {
         if ($result->num_rows == 1) {
           // output data of each row
           while($row = $result->fetch_assoc()) {
-            $output = 1;
-            $_SESSION['user'] = array('name' => $row['name'] ,'email'=>$row['email']);
+            $isadmin = $row['is_admin'];
+            if($isadmin == 0) {
+              $output = 1;
+              $_SESSION['user'] = array('name' => $row['name'] ,'email'=>$row['email']);
+            } else if($isadmin == 1) {
+              $output = 2;
+              $_SESSION['admin'] = array('name' => $row['name'] ,'email'=>$row['email']);
+            }
           }        
         } else {
-          $output =  "Error: " . $query . "<br>" . $this->data->error;
+          $output =  "Password or Username does't matched";
         }
         return $output;
         

@@ -1,0 +1,16 @@
+ .ced {
+    color :#e7663f;
+    text-shadow: 2px 2px 2px black;
+    font-size: 30px;
+    padding-bottom:20px ;
+  }
+  .host {
+    color :#585CA7;
+     text-shadow: 2px 2px 2px black;
+     font-size: 30px;
+  }
+  .host:hover {
+    color:#e7663f;
+    text-shadow: 2px 2px 2px black;
+    font-size: 30px;
+  }

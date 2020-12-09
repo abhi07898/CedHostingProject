@@ -17,8 +17,8 @@ switch($action) {
     break;
     case 'login':
         $email = $_POST['email'];
-        $password = $_POST['password'];
-        $query = "SELECT * from tbl_user WHERE `email`='$email' and `password`='$password' and `email_approved`= 1 or `phone_approved` = 1";
+        $password = md5($_POST['password']);
+        $query = "SELECT * from tbl_user WHERE (`email`='$email' AND`password`='$password') AND (`email_approved`= 1 OR `phone_approved` = 1)";
         $data = $objUser->login($query);
         echo $data;
     break;
