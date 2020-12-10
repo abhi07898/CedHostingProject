@@ -1,5 +1,5 @@
-<?php 
-if($menu='cart');
-include'header.php';?>
+<?php
+if ($menu='cart');
+include 'header.php';?>
 
-<?php include'footer.php';?>
+<?php include 'footer.php';?>
