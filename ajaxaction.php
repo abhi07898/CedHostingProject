@@ -67,5 +67,36 @@ case 'menus_dayanamic':
     $data = $objProduct->select($query);
     print_r($data);
     break;
+case "fatched_hosting_category" : 
+    $query = "SELECT * FROM tbl_product WHERE `id`<>1 AND `prod_available` = 1";
+    $data = $objProduct->select($query);
+    print_r($data);
+    break;
+case "verified_gmail" :
+    $email = $_POST['email']; 
+    $query =  "UPDATE tbl_user SET `email_approved` = 1  WHERE `email` = '$email'";
+    $data = $objUser->update($query);
+    echo $data;
+    break;
+case 'Insert_multiple' :
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $url = $_POST['url'];
+    $mprice = $_POST['mprice'];
+    $yprice = $_POST['yprice'];
+    $sku = $_POST['sku'];
+    $data = $_POST['data'];
+    $data_json = json_encode($data);
+    $data = $objProduct->InsertMultiData_product($id, $name, $url, $mprice, $yprice, $sku, $data_json);
+    echo $data;
+    // print_r($data_json);
+    // $query = "INSERT into tbl_product(`prod_parent_id`, `prod_name`,`link`, `prod_available`) VALUES ('$id','$name', '$url', 0) ";
+    // $data = $objProduct->insert($query);
+    // if ($data == 1) {
+    //     $query = "INSERT into tbl_product_description(`prod_id`, `prod_name`,`description`, `mon_price`, `annual_price`, `sku`) VALUES ('$id','$name', '$url', 0) ";
+    //     $data = $objProduct->insert($query);
+    // } else {
+    //      echo $data;
+    // }
 }
 ?> 

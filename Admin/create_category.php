@@ -63,7 +63,7 @@
                     <div class="input-group-prepend">
                     </div>
                     <select class="form-control text-center" id="prod_avail" >
-                      <option>Select-Availibility</option>
+                      <!-- <option>Select-Availibility</option> -->
                       <option value="0">NOT-AVAILABLE</option>
                       <option value="1">AVAILABLE</option>
                     </select>
@@ -136,9 +136,9 @@
           if(prod_name == '') {
             alert('Product name is Required Feild');
             $('#prod_name').focus();
-          }else if(prod_avail == '') {
-            alert("please Select Availibility of product");
-            $('#prod_avail').focus();
+          // }else if(prod_avail != 0 || prod_avail !=1) {
+          //   alert("please Select Availibility of product");
+          //   $('#prod_avail').focus();
           } else if(!(prod_name.match(letter))){
             alert("Product Name is not in Correct Form");
             $('#prod_name').focus();
@@ -254,8 +254,6 @@
               
             }
           });
-        });
-            
-           
+        });           
      });
      </script>

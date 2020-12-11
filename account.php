@@ -1,10 +1,3 @@
-<!--
-Au
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -33,7 +26,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--script-->
 </head>
 <body>
-<?php include 'header.php';?>
+<?php
+/**
+ * Short description for code
+ * php version 7.2.10
+ *
+ * @category Category_Name
+ * @package  PackageName
+ * @author   Abhishek Pandey <author@example.com>
+ * @license  http://www.php.net/license/3_01.txt 
+ * @link     http://pear.php.net/package/PackageName
+ *
+ * This is a "Docblock Comment"
+ */
+require 'header.php';
+?>
     <!---header--->
         <!---login--->
             <div class="content">
@@ -106,7 +113,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
 <!-- login -->
                 <!---footer--->
-<?php include 'footer.php';?>
+<?php require 'footer.php';?>
             <!---footer--->
             <script type="text/javascript">
                 $(document).ready(function(){
@@ -148,7 +155,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 type : 'POST',
                                 data : {action:action, name:name, email:email,contact:contact, password:conf_pass,question:sec_que, answer:sec_ans},
                                 success : function (data) {
-                                    alert(data);
+                                    if(data==1) {
+                                        var random = Math.random() * (+1111 - +9999) + +100; 
+                                        alert("Data Registered Successfully! Hope You Recieved varify mail ");
+                                        window.location.href="email.php?email="+email;
+                                    }
+                                    
+                                    
                                 }
                             });
                         }

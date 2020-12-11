@@ -1,6 +1,10 @@
 <?php
+session_start();
 require "vendor/autoload.php";
-
+$email = $_GET['email'];
+// $otp = $_GET['otp'];
+$otp = rand(1111, 9999);
+$_SESSION['otp'] = array('email'=>$email, 'otp'=>$otp);
 $robo = 'testabhismtp@gmail.com';
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -32,17 +36,20 @@ try {
     $mailer->SMTPSecure = 'ssl';
     $mailer->Port = 465;
 
-    $mailer->setFrom('testabhismtp@gmail.com', 'Abhishek with Ced HOST');
-    $mailer->addAddress('abhi07898@gmail.com', 'Abhishek');
+    $mailer->setFrom('testabhismtp@gmail.com', 'Abhishek from CedHOST');
+    $mailer->addAddress($email, 'Abhishek');
 
     $mailer->isHTML(true);
     $mailer->Subject = 'PHPMailer Test';
-    $mailer->Body = 'This is a <b>SAMPLE<b> email sent through <b>PHPMailer<b>';
+    $mailer->Body = 'Hello Mr .. '.$email.'<br> Hey <b font-color="red">Congrtas!!<b> to you <br> You have done Your First Step with <br> <b>CedHosting<b>! for more- know to host Verify your e-mail , <i> OTP = '.$otp;
 
     $mailer->send();
     $mailer->ClearAllRecipients();
-    echo "MAIL HAS BEEN SENT SUCCESSFULLY";
+    // echo "<script>alert('MAIL HAS BEEN SENT SUCCESSFULLY')<script>";
+    echo '<script>window.location.href="registration_verify.php"</script>';
 
 } catch (Exception $e) {
     echo "EMAIL SENDING FAILED. INFO: " . $mailer->ErrorInfo;
 }
+print_r($_SESSION['otp']);
+?>
