@@ -68,12 +68,13 @@ class Product
         return $output;        
     }
 // fucntion for delete the data
-    public function delete($query) {
-        if ($this->data->query($query) === true) {
+    public function delete($query) 
+    {
+        if ($this->data->query($query) == true) {
             $output =  1;
         } else {
-            // $output =  "Error: " . $query . "<br>" . $this->data->error;
-            $output = 0;
+            $output =  "Error: " . $query . "<br>" . $this->data->error;
+            // $output = 0;
         }
         return $output;
     }

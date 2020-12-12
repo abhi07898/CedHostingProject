@@ -143,6 +143,9 @@
             alert("Product Name is not in Correct Form");
             $('#prod_name').focus();
           }
+          // } else if(!(prod_url.atch(url))) {
+          //   alert("Url Should be in Proper Way");
+          // }
           else {
             var action = "insert_product(hosting)";
             $.ajax({
@@ -250,8 +253,7 @@
                 show_pro_table();
               } else if(data==0) {
                 alert("Some little Concern in DELEt");
-              }        
-              
+              }                     
             }
           });
         });           

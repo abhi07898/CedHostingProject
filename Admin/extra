@@ -1,0 +1,50 @@
+// product_cat = $('#product_cat').val();
+    // product_name = $('#product_name').val();
+    // page_url = $('#page_url').val();
+    // monthly_price = $('#monthly_price').val();
+    // annual_price = $('#annual_price').val();
+    // sku = $('#sku').val();
+    // web_space = $('#web_space').val();
+    // band_width = $('#band_width').val();
+    // free_domain = $('#free_domain').val();
+    // lt_support = $('#lt_support').val();
+    // mail_box = $('#mail_box').val();
+    // create_new = $('#create_new').val();
+    // if (product_cat ==''|| product_name ==''|| monthly_price ==''|| annual_price ==''|| sku ==''|| web_space ==''|| band_width ==''|| free_domain ==''|| lt_support ==''|| mail_box =='') {
+    //   alert("marks with '*' symbols are required" );
+    // } else
+    // if(!(product_name.match(letter))) {
+    //   alert("Product Name is not in Proper way!!!");
+    //   $('#product_name').focus();
+    // } else if(!(page_url.match(url))) {
+    //   alert("Page URL is not in Proper way!!!");
+    //   $('#page_url').focus();
+    // } else if(!(monthly_price.match(number))) {
+    //   alert("monthly Price is not a number!!!");
+    //   $('#monthly_price').focus();
+    // } else if(!(annual_price.match(number))) {
+    //   alert("Annual Price is not a number!!!");
+    //   $('#annual_price').focus();
+    // } else if(!(sku.match(letter))) {
+    //   alert("SKU is not in proper way!!!");
+    //   $('#sku').focus();
+    // } else if(!(web_space.match(number))) {
+    //   alert("web_space is not a number!!!");
+    //   $('#web_space').focus();
+    // } else if(!(band_width.match(letter))) {
+    //   alert("band_width is not in proper way!!!");
+    //   $('#band_width').focus(); disabled=""
+    // } else if(!(free_domain.match(letter))) {
+    //   alert("free_domain is not in proper way!!!");
+    //   $('#free_domain').focus(); 
+    // } else if(!(lt_support.match(letter))) {
+    //   alert("lt_support is not in proper way!!!");
+    //   $('#lt_support').focus(); 
+    // } else if(!(mail_box.match(email))) {
+    //   alert("mail_box is not in proper way!!!");
+    //   $('#mail_box').focus(); 
+    // } else {
+    //   alert(product_cat);
+      
+    // }
+  // });

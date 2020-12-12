@@ -29,16 +29,23 @@
       </div>
     </div> --> 
           
-        <table class="table  ml-4 mr-4 text-center " id="product_cat_detail">
+        <table class="table  ml-4 mr-4 text-center " id="product_detail">
           <thead>
-            <th>ID</th>
             <th>PRODUCT NAME</th>
             <th>Availibility</th>
             <th>URL</th> 
+            <th>LAUNCH-DATE</th>
+            <th>Web_Space</th>
+            <th>Band_Width</th>
+            <th>Free_Domain</th>
+            <th>lts</th>
+            <th>Mailbox</th>
+            <th>MONTHLY PRICE</th>
+            <th>ANNUAL PRICE</th>
+            <th>SKU</th>
             <th>ACTION</th>
           </thead>
           <tbody id='table_result'>
-          
           </tbody>
         </table>
    
@@ -71,4 +78,60 @@
   <!-- closing Modal -->
       <!-- Footer -->
   <?php require 'footer_admin.php';?>
+  <!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+  <script>
+  $(document).ready(function(){
+    action = "View_product_list";
+    $.ajax({
+      url : '../ajaxaction.php',
+      type : 'post',
+      dataType : 'json',
+      data : {action:action},
+      success : function(data) {
+        var html = '';
+
+        for(var i=0; i<data.length; i++) {
+          var disc = jQuery.parseJSON(data[i]['description'])
+          html+= "<tr><td>"+data[i]['prod_name']+"</td><td>"+data[i]['prod_available']+"</td><td>"+data[i]['link']+"</td><td>"+data[i]['prod_launch_date']+"</td><td>"+disc.Web_Space+"</td><td>"+disc.Band_Width+"</td><td>"+disc.Free_Domain+"</td><td>"+disc.lts+"</td><td>"+disc.Mailbox+"</td><td>"+data[i]['mon_price']+"</td><td>"+data[i]['annual_price']+"</td><td>"+data[i]['sku']+"</td><td><button  class='btn btn-outline-primary edit' data-eid="+data[i]['prod_id']+"  data-toggle='modal' data-target='#edit_cat_product' >EDIT</button><button class='btn btn-outline-danger delete' data-did="+data[i]['prod_id']+" >DELETE</button></td></tr>";
+        }
+        $('#table_result').html(html);
+        $('#product_detail').DataTable();
+      }
+    });
+    $(document).on('click','.delete', function(){
+      var id  = $(this).data("did");
+      var element = this;
+      var action = "delete_product_details";
+      $.ajax({
+        url : '../ajaxaction.php',
+        type : 'post',
+        data : {id:id, action:action}, 
+        success : function(data) {
+          if(data==1) {
+            alert("Data Deleted Successsfully");
+          } 
+        }
+      });
+    });
+    $(document).on('click','.edit', function(){
+      var id  = $(this).data("eid");
+      alert(id);
+      // var element = this;
+      // var action = "delete_product_details";
+      // $.ajax({
+      //   url : '../ajaxaction.php',
+      //   type : 'post',
+      //   data : {id:id, action:action}, 
+      //   success : function(data) {
+      //     if(data==1) {
+      //       alert("Data Deleted Successsfully");
+      //     } 
+      //   }
+      // });
+    });
+  });
+  </script>
 

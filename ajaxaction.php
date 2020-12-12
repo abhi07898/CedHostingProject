@@ -89,14 +89,19 @@ case 'Insert_multiple' :
     $data_json = json_encode($data);
     $data = $objProduct->InsertMultiData_product($id, $name, $url, $mprice, $yprice, $sku, $data_json);
     echo $data;
-    // print_r($data_json);
-    // $query = "INSERT into tbl_product(`prod_parent_id`, `prod_name`,`link`, `prod_available`) VALUES ('$id','$name', '$url', 0) ";
-    // $data = $objProduct->insert($query);
-    // if ($data == 1) {
-    //     $query = "INSERT into tbl_product_description(`prod_id`, `prod_name`,`description`, `mon_price`, `annual_price`, `sku`) VALUES ('$id','$name', '$url', 0) ";
-    //     $data = $objProduct->insert($query);
-    // } else {
-    //      echo $data;
-    // }
+    break;
+case 'View_product_list' :
+    $sql = "SELECT * FROM tbl_product inner join tbl_product_description on tbl_product.id = tbl_product_description.prod_id";
+    $data = $objProduct->select($sql);
+    print_r($data);
+    break;
+case 'delete_product_details'  :
+    $id = $_POST['id'];
+    $query = "DELETE `tbl_product`,`tbl_product_description`
+    FROM `tbl_product`
+    INNER JOIN `tbl_product_description` ON `tbl_product`.`id` = `tbl_product_description`.`prod_id`
+    WHERE `prod_id`='$id'";
+    $data = $objProduct->delete($query);
+    echo $data;
 }
 ?> 
