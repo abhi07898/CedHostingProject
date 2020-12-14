@@ -15,11 +15,28 @@ session_start();
 require 'Config.php';
 class User
 {
-    public function __construct() {
+    /**
+     * Display the cart
+     *
+     * @return String
+     *
+     * @since 1.0.1
+     */
+    public function __construct() 
+    {
         $obj = new Config();
         $this->data = $obj->Connect();
     }
     //methode for insert the data 
+    /**
+     * Display the cart
+     * 
+     * @param query $query comment
+     *
+     * @return String
+     *
+     * @since 1.0.1
+     */
     public function insert($query) 
     {
         if ($this->data->query($query) === true) {
@@ -35,18 +52,27 @@ class User
 
 
 
-     //methode for select the data 
+     //methode for select the data
+    /**
+     * Display the cart
+     * 
+     * @param query $query comment
+     *
+     * @return String
+     *
+     * @since 1.0.1
+     */ 
     public function login($query)
     {
         $result = $this->data->query($query);
         if ($result->num_rows == 1) {
-          // output data of each row
+            // output data of each row
             while ($row = $result->fetch_assoc()) {
                 $isadmin = $row['is_admin'];
                 if ($isadmin == 0) {
                     $output = 1;
                     $_SESSION['user'] = array('name' => $row['name'] ,'email'=>$row['email']);
-                } else if($isadmin == 1) {
+                } else if ($isadmin == 1) {
                     $output = 2;
                     $_SESSION['admin'] = array('name' => $row['name'] ,'email'=>$row['email']);
                 }
@@ -57,13 +83,23 @@ class User
         return $output;
         
     }
-    public function select($query) {
+    /**
+     * Display the cart
+     * 
+     * @param query $query comment
+     *
+     * @return String
+     *
+     * @since 1.0.1
+     */
+    public function select($query) 
+    {
         $result = $this->data->query($query);
         if ($result->num_rows == 1) {
-        // output data of each row
+            // output data of each row
             while ($row = $result->fetch_assoc()) {
                 $output = 1;
-                $_SESSION['user'] = array('name' => $row['name'] ,'email'=>$row['email']);
+                $_SESSION['user'] = array('name' => $row['name'], 'email'=>$row['email']);
             }        
         } else {
             $output =  "Error: " . $query . "<br>" . $this->data->error;
@@ -75,7 +111,16 @@ class User
 
     
 
-     //methode for updte the data 
+    //methode for updte the data 
+    /**
+     * Display the cart
+     * 
+     * @param query $query comment
+     *
+     * @return String
+     *
+     * @since 1.0.1
+     */
     public function update($query) 
     {
         if ($this->data->query($query) === true) {

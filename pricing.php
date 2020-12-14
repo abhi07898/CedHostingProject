@@ -1,9 +1,17 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+<?php
+/**
+ * Short description for code
+ * php version 7.2.10
+ *
+ * @category Category_Name
+ * @package  PackageName
+ * @author   Abhishek Pandey <author@example.com>
+ * @license  http://www.php.net/license/3_01.txt 
+ * @link     http://pear.php.net/package/PackageName
+ *
+ * This is a "Docblock Comment"
+ */
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -33,8 +41,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 <?php 
-if($menu='pricing');
-include 'header.php';?>
+if ($menu='pricing');
+require 'header.php';?>
     <!---header--->
         <!---prices--->
                 <div class="content">
@@ -254,7 +262,7 @@ include 'header.php';?>
                     <!---prices--->
                 </div>
             <!---footer--->
-<?php include 'footer.php';?>
+<?php require 'footer.php';?>
             <!---footer--->
             
             

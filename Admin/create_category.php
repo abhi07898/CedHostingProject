@@ -1,9 +1,22 @@
-  <!-- including header file -->
-  <?php require 'admin_header.php';?>
+<!-- including header file -->
+  <?php
+  /**
+   * Short description for code
+   * php version 7.2.10
+   *
+   * @category Category_Name
+   * @package  PackageName
+   * @author   Abhishek Pandey <author@example.com>
+   * @license  http://www.php.net/license/3_01.txt 
+   * @link     http://pear.php.net/package/PackageName
+   *
+   * This is a "Docblock Comment"
+   */
+  require 'admin_header.php';?>
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-  <?php require 'search_admin.php';?>
+    <?php require 'search_admin.php';?>
     <!-- Header -->
     <div class="header bg-primary pb-6">
       <div class="container-fluid">
@@ -119,7 +132,7 @@
 </div>
   <!-- closing Modal -->
       <!-- Footer -->
-  <?php require 'footer_admin.php';?>
+    <?php require 'footer_admin.php';?>
 
 <!-- DataTables CSS -->
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
@@ -171,7 +184,7 @@
                 success : function(data) {
                   var html = '';
                   for(var i=0; i<data.length; i++) {
-                    html+= "<tr><td>"+data[i]['id']+"</td><td>"+data[i]['prod_name']+"</td><td>"+data[i]['prod_available']+"</td><td>"+data[i]['link']+"</td><td><button  class='btn btn-primary edit' data-eid="+data[i]['id']+"  data-toggle='modal' data-target='#edit_cat_product' >EDIT</button><button class='btn btn-primary delete' data-did="+data[i]['id']+" >DELETE</button></td></tr>";
+                    html+= "<tr><td>"+data[i]['id']+"</td><td>"+data[i]['prod_name']+"</td><td>"+data[i]['prod_available']+"</td><td>"+data[i]['html']+"</td><td><button  class='btn btn-primary edit' data-eid="+data[i]['id']+"  data-toggle='modal' data-target='#edit_cat_product' >EDIT</button><button class='btn btn-primary delete' data-did="+data[i]['id']+" >DELETE</button></td></tr>";
                   }
                   $('#table_result').html(html);
                   $('#product_cat_detail').DataTable();
@@ -207,7 +220,7 @@
                       </tr>\
                       <tr>\
                         <td>URL</td>\
-                        <td><input type='text' id='edit_url' value="+data[0]['link']+"></td>\
+                        <td><input type='text' id='edit_url' value="+data[0]['html']+"></td>\
                       </tr>";
                     $('#result-table').html(html);  
             }
@@ -238,6 +251,7 @@
         //for delte 
         $(document).on('click','.delete', function(e){
           e.preventDefault();
+          if(confirm("Are you realy want to delete it!!!!!")) {
           var action = 'delete_cat_product';
           var element = $(this).val();
           var id  = $(this).data("did");
@@ -256,6 +270,7 @@
               }                     
             }
           });
+        }
         });           
      });
      </script>

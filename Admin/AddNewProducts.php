@@ -171,7 +171,7 @@ require 'admin_header.php';?>
     <?php require 'footer_admin.php';?>
 <script>
 $(document).ready(function(){
-  $('#create_new').prop("disabled", true );
+ $('#create_new').prop("disabled", false);
   var action = "fatched_hosting_category";
   $.ajax({
     url: '../ajaxaction.php',
@@ -186,176 +186,330 @@ $(document).ready(function(){
       $('#product_cat').html(html);
     }
   });
-    var letter = /^([a-zA-Z0-9-]+\s?)*$/;
-    var url = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-    var number = /^[0-9]+$/;
-    var email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;  
+  var letter = /^([a-zA-Z0-9-]+\s?)*$/;
+  var url = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+  var number = /^[0-9]+$/;
+  var email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;  
  
-  var product_name;
-  var page_url;
-  var monthly_price;
-  var annual_price;
-  var sku;
-  var web_space;
-  var band_width;
-  var band_width;
-  var free_domain;
-  var lt_support;
-  var mail_box;
-  var temp = [];
-  $('#product_name').focusout(function(){
-  product_name = $('#product_name').val().trim();
-  if(!(product_name.match(letter))) {
-      $('#product_name_err').html("Product Name is not in Proper way!!!");
-      $('#product_name').focus();
-      temp.push("false");
-  }else if(!isNaN(product_name)) {
-    $('#product_name_err').html("Only Numbers are not allowed");
-  } else {
-    $('#product_name_err').html("");
-  }
-  enabel_submit();
+  var err_product_name = false;
+  var err_page_url = false;
+  var err_monthly_price = false;
+  var err_annual_price = false;
+  var err_sku = false;
+  var err_web_space = false;
+  var err_band_width = false;
+  var err_band_width = false;
+  var err_free_domain = false;
+  var err_lt_support = false;
+  var err_mail_box = false;
+  
+$('#product_name').focusout(function(){
+  check_product_name();
 });
-// page url validation
-  $('#page_url').focusout(function(){
-  page_url = $('#page_url').val().trim();
-  if(!(page_url.match(url))) {
-      $('#page_url_err').html("URL is not in Proper way!!!");
-      $('#page_url').focus();
-     temp.push("false");
-  } else {
-    $('#page_url_err').html("");
-  }
-  enabel_submit();
+$('#page_url').focusout(function(){
+  chek_page_url();
 });
-// monthly  price validation
 $('#monthly_price').focusout(function(){
-  monthly_price = $('#monthly_price').val().trim();
-  if(!(monthly_price.match(number))) {
-      $('#monthly_price_err').html("Monthly Price  is not in Proper way!!!");
-      $('#monthly_price').focus();
-     temp.push("false");
-  } else if(monthly_price > 15) {
-    $('#monthly_price_err').html("More Then 15 are not allowed");
-  } 
-  else {
-    $('#monthly_price_err').html("");
-  }
-  enabel_submit();
+  check_monthly_price ();
 });
-// annual price validation
 $('#annual_price').focusout(function(){
-  annual_price = $('#annual_price').val().trim();
-  if(!(annual_price.match(number))) {
-      $('#annual_price_err').html("Annual Price  is not in Proper way!!!");
-      $('#annual_price').focus();
-     temp.push("false");
-    } else if(annual_price > 15) {
-    $('#annual_price_err').html("More Then 15 are not allowed");
-    } 
-    else {
-      $('#annual_price_err').html("");
-    }
-  enabel_submit();
+  check_annaul_price();
 });
-// sku validation
 $('#sku').focusout(function(){
-  sku = $('#sku').val().trim();
-  if(!(sku.match(/^([a-zA-Z-#]+\s?)*$/))) {
-      $('#sku_err').html("SKU is not in Proper way!!!");
-      $('#sku').focus();
-     temp.push("false");
-  }
-   else {
-    $('#sku_err').html("");
-  }
-  enabel_submit();
+  check_sku();
 });
 // web_space validation
 $('#web_space').focusout(function(){
-  web_space = $('#web_space').val().trim();
-  if(!(web_space.match(number))) {
-      $('#web_space_err').html("Only numeric value is acceptable");
-      $('#web_space').focus();
-     temp.push("false");
-  } else if(web_space > 5)  {
-      $('#web_space_err').html("Web Space should less than 5");
-      $('#web_space').focus();
-  }
-  else {
-    $('#web_space_err').html("");
-  }
-  enabel_submit();
+  check_web_space();
 });
 // band_width validation
 $('#band_width').focusout(function(){
-  band_width = $('#band_width').val().trim();
-  if(!(band_width.match(number))) {
-      $('#band_width_err').html("Only numeric value is acceptable");
-      $('#band_width').focus();
-     temp.push("false");
-  } else if(band_width > 5) {
-      $('#band_width_err').html("band_width should less than 5!!!");
-      $('#band_width').focus();
-  } 
-  else {
-    $('#band_width_err').html("");
-  }
-  enabel_submit();
+  check_band_width();
 });
 //free_domain validation 
 $('#free_domain').focusout(function(){
-  free_domain = $('#free_domain').val().trim();
-  if((!(free_domain.match(number)))|| (!(free_domain.match(/^([a-zA-Z]+\s?)*$/)))) {
-      $('#free_domain_err').html("Value should pure numeric or pure alphabetic");
-      $('#free_domain').focus();
-     temp.push("false");
-  }
-  else {
-    $('#free_domain_err').html("");
-  }
-  enabel_submit();
+  check_free_domain();
 });
 // lt validation
 $('#lt_support').focusout(function(){
-  lt_support = $('#lt_support').val().trim();
-  if(!(lt_support.match(/^([a-zA-Z0-9,]+\s?)*$/))) {
-      $('#lt_support_err').html("lt_support would only contin alpha/alphanumeric");
-      $('#lt_support').focus();
-     temp.push("false");
-  } else { 
-    $('#lt_support_err').html("");
-  }
-  enabel_submit();
+  check_lt_support();
 });
 //gmail validation
 $('#mail_box').focusout(function(){
-  mail_box = $('#mail_box').val().trim();
-  if(!(mail_box.match(email))) {
-      $('#mail_box_err').html("mail_box is not in Proper way!!!");
-      $('#mail_box').focus();
-     temp.push("false");
-  } else {
-    $('#mail_box_err').html("");
-  }
-  enabel_submit();
+  check_mail_box();
 });
-function enabel_submit() {
-  if(temp.length > 0) {
-    $('#create_new').prop("disabled", true );
-    temp.pop();
+function check_product_name() {
+
+  product_name = $('#product_name').val().trim();
+  if(product_name == '') {
+    $('#product_name_err').html("Product Name is required!!!");
+      $('#product_name').focus();
+      err_product_name = true;
+  }
+  else if(!(product_name.match(letter))) {
+      $('#product_name_err').html("Product Name is not in Proper way!!!");
+      $('#product_name').focus();
+      err_product_name = true;
+  }else if(!isNaN(product_name)) {
+    $('#product_name_err').html("Only Numbers are not allowed");
+    err_product_name = true;
   } else {
-    $('#create_new').prop("disabled", false );   
+    err_product_name = false;
+    $('#product_name_err').html("");
+  }
+  debugger;
+  validate_error();
+}
+// function for chrck  url
+function chek_page_url() {
+  debugger;
+  page_url = $('#page_url').val().trim(); 
+  if(page_url.length=='') {
+    $('#page_url_err').html("URL is a required feild!!!");
+      $('#page_url').focus();
+      err_page_url = true;
+  }
+  else if(!(page_url.match(url))) {
+      $('#page_url_err').html("URL is not in Proper way!!!");
+      $('#page_url').focus();
+      err_page_url = true;
+  } else {
+    err_page_url = false;
+    $('#page_url_err').html("");
+  }
+  debugger;
+  validate_error();
+}
+// function for check monthly_price
+function check_monthly_price () {
+  monthly_price = $('#monthly_price').val().trim();
+  if(monthly_price.length == '') {
+    $('#monthly_price_err').html("Monthly Price  is Required!!!");
+    $('#monthly_price').focus();
+    err_monthly_price = true;
+  }
+  else if(!(monthly_price.match(/^[0-9]*\.?[0-9]*$/))) {
+      $('#monthly_price_err').html("Monthly Price  is not in Proper way!!!");
+      $('#monthly_price').focus();
+      err_monthly_price = true;
+  } else if(monthly_price.length > 15) {
+    $('#monthly_price_err').html("More Then 15 values are not allowed");
+    $('#monthly_price').focus();
+    err_monthly_price = true;
+  } 
+  else {
+    err_monthly_price = false;
+    $('#monthly_price_err').html("");
+  }
+  debugger;
+  validate_error();
+  
+}
+// function for chgeckl annual price 
+function check_annaul_price() {
+  annual_price = $('#annual_price').val().trim();
+  if(annual_price.length == '') {
+    $('#annual_price_err').html("Annual Price is Required!!!");
+    $('#annual_price').focus();
+    err_annual_price = true;
+  }
+  else if(!(annual_price.match(/^[0-9]*\.?[0-9]*$/))) {
+      $('#annual_price_err').html("Annual Price  is not in Proper way!!!");
+      $('#annual_price').focus();
+      err_annual_price = true;
+  } else if(annual_price.length > 15) {
+    $('#annual_price_err').html("More Then 15 are not allowed");
+    err_annual_price = true;
+    } 
+  else {
+      $('#annual_price_err').html("");
+      err_annual_price = false;
+    }
+    debugger;
+    validate_error();
+}
+// cehck function for sku validation 
+
+function check_sku() {
+  sku = $('#sku').val().trim();
+  if(sku.length == '') {
+    $('#sku_err').html("SKU is required!!!");
+    $('#sku').focus();
+    err_sku = true;
+  }
+  else if(!(sku.match(/^([a-zA-Z-0-9#]+\s?)*$/))) {
+      $('#sku_err').html("SKU is not in proper way!!!");
+      $('#sku').focus();
+      err_sku = true;
+  }
+   else {
+    $('#sku_err').html("");
+    err_sku = false;
+  }
+  debugger;
+  validate_error();
+}
+// check funciton for web space
+function check_web_space() {
+  web_space = $('#web_space').val().trim();
+  if(web_space.length == '') {
+    $('#web_space_err').html("Web Space feild is required");
+    $('#web_space').focus();
+    err_web_space = true;
+  }
+  else if(!(web_space.match(/^[0-9]*\.?[0-9]*$/))) {
+      $('#web_space_err').html("Only numeric value is acceptable");
+      $('#web_space').focus();
+      err_web_space = true;
+  } else if(web_space.length > 5)  {
+      $('#web_space_err').html("Length should be less than 5!!!");
+      $('#web_space').focus();
+      err_web_space = true;
+  }
+  else {
+    err_web_space = false;
+    $('#web_space_err').html("");
+    
+  }
+  debugger;
+  validate_error();
+}
+// check function for band-width 
+function check_band_width() {
+  band_width = $('#band_width').val().trim();
+  if(band_width.length == '') {
+    $('#band_width_err').html("Band-Width feild are Required");
+    $('#band_width').focus();
+    err_band_width = true;
+  }
+  else if(!(band_width.match(/^[0-9]*\.?[0-9]*$/))) {
+      $('#band_width_err').html("Only numeric value is acceptable");
+      $('#band_width').focus();
+      err_band_width = true;
+  } else if(band_width.length > 5) {
+      $('#band_width_err').html("Length should be less than 5!!!");
+      $('#band_width').focus();
+      err_band_width = true;
+  } 
+  else {
+    err_band_width = false;
+    $('#band_width_err').html("");
+  }
+  debugger;
+  validate_error();
+}
+
+// checek function for free_domain
+function check_free_domain() {
+  var hasNumber = /\d/;
+  free_domain = $('#free_domain').val().trim();
+  if(free_domain.length =='') {
+    $('#free_domain_err').html("Free Domain is Required Feild");
+    $('#free_domain').focus();
+    err_free_domain = true; 
+  } 
+  else if((!(free_domain.match(/^([a-zA-Z-0-9]+\s?)*$/)))) {
+      $('#free_domain_err').html("Value should pure numeric or pure alphabetic");
+      $('#free_domain').focus();
+      err_free_domain = true;
+  } else if(isNaN(free_domain) && hasNumber.test(free_domain)) {
+    $('#free_domain_err').html("Value should pure numeric or pure alphabetic");
+      $('#free_domain').focus();
+      err_free_domain = true;
+  } // true)
+  else {
+    err_free_domain = false;
+    $('#free_domain_err').html("");
+  }
+  debugger;
+  validate_error();
+}
+
+// check  function for lt-support  
+function check_lt_support() {
+  lt_support = $('#lt_support').val().trim();
+  if(lt_support.length=='') {
+    $('#lt_support_err').html("lt_support feild is required feild");
+    $('#lt_support').focus();
+    err_lt_support = true;
+  } else if(!isNaN(lt_support)) {
+    $('#lt_support_err').html("Only Numeric value are not allowed");
+    $('#lt_support').focus();
+    err_lt_support = true;
+  }
+  else if(!(lt_support.match(/^([a-zA-Z0-9,]+\s?)*$/))) {
+      $('#lt_support_err').html("lt_support would only contin alpha/alphanumeric");
+      $('#lt_support').focus();
+      err_lt_support = true;
+  } else { 
+    err_lt_support = false;
+    $('#lt_support_err').html("");
+  }
+  debugger;
+  validate_error();
+}
+// check function for mail box 
+function check_mail_box() {
+  var hasNumber = /\d/;
+  mail_box = $('#mail_box').val().trim();
+  if(mail_box.length == '') {
+    $('#mail_box_err').html("mail_box is required feild!!!");
+    $('#mail_box').focus();
+    err_mail_box = true;
+  }
+  else if(!(mail_box.match(/^([a-zA-Z-0-9]+\s?)*$/))) {
+      $('#mail_box_err').html("No Special Chars(Value should pure numeric or pure alphabetic)");
+      $('#mail_box').focus();
+      err_mail_box = true;
+  } else if(isNaN(mail_box) && hasNumber.test(mail_box)) {
+    $('#mail_box_err').html("Value should pure numeric or pure alphabetic");
+      $('#mail_box').focus();
+      err_mail_box = true;
+  }
+   else {
+    $('#mail_box_err').html("");
+    err_mail_box = false;
+  }
+  debugger;
+  validate_error();
+}
+function validate_error() {
+  debugger;
+  if(err_product_name == true || err_page_url == true || err_monthly_price == true || err_annual_price == true || err_sku == true || err_web_space == true || err_band_width == true || err_band_width == true || err_free_domain == true || err_lt_support == true || err_mail_box == true) {
+    $('#create_new').prop("disabled", true);
+  } else {
+    $('#create_new').prop("disabled", false);
   }
 }
-console.log(temp);
 // code for insert the whole product data in two table using single ajax
   $(document).on('click','#create_new', function(e){ 
     e.preventDefault();  
     var product_cat = $('#product_cat').val().trim();
-    if (product_cat ==''|| product_name ==''|| monthly_price ==''|| annual_price ==''|| sku ==''|| web_space ==''|| band_width ==''|| free_domain ==''|| lt_support ==''|| mail_box =='') {
-        alert("marks with '*' symbols are required" );
-  } else {  
+    err_product_name = false;
+    err_page_url = false;
+    err_monthly_price = false;
+    err_annual_price = false;
+    err_sku = false;
+    err_web_space = false;
+    err_band_width = false;
+    err_band_width = false;
+    err_free_domain = false;
+    err_lt_support = false;
+    err_mail_box = false;
+
+    check_product_name();
+    chek_page_url();
+    check_monthly_price ();
+    check_annaul_price();
+    check_sku();
+    check_web_space();
+    check_band_width();
+    check_free_domain();
+    check_lt_support();
+    check_mail_box();
+    debugger;
+    alert(err_product_name);
+    if(err_product_name == false && err_page_url == false && err_monthly_price == false && err_annual_price == false && err_sku == false && err_web_space == false && err_band_width == false && err_band_width == false && err_free_domain == false && err_lt_support == false && err_mail_box == false) {  
       features_data = {'Web_Space':web_space, 'Band_Width':band_width,'Free_Domain':free_domain, 'lts':lt_support, 'Mailbox':mail_box};
           var action = 'Insert_multiple';
           $.ajax({
@@ -368,10 +522,9 @@ console.log(temp);
               }
             } 
           });
-  }
+    } else { 
+      alert("SOME CONCERN");
+    }
+ });
 });
-
-});
-
-
 </script>

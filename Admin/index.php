@@ -1,15 +1,27 @@
 
   <!-- including header file -->
   <?php
+  /**
+   * Short description for code
+   * php version 7.2.10
+   *
+   * @category Category_Name
+   * @package  PackageName
+   * @author   Abhishek Pandey <author@example.com>
+   * @license  http://www.php.net/license/3_01.txt 
+   * @link     http://pear.php.net/package/PackageName
+   *
+   * This is a "Docblock Comment"
+   */
   require 'admin_header.php';
-  if(!isset($_SESSION['admin'])){
-    echo '<script>window.location.href = "../login.php"</script>';
-  }
-  ?>
+  if (!isset($_SESSION['admin'])) {
+        echo '<script>window.location.href = "../login.php"</script>';
+    }
+    ?>
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-  <?php require 'search_admin.php';?>
+    <?php require 'search_admin.php';?>
     <!-- Header -->
     <div class="header bg-primary pb-6">
       <div class="container-fluid">
@@ -401,4 +413,4 @@
         </div>
       </div>
       <!-- Footer -->
-     <?php require 'footer_admin.php';?>
+        <?php require 'footer_admin.php';?>

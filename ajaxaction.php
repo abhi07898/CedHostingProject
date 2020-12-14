@@ -1,6 +1,18 @@
 <?php
-include 'Class/User.php';
-include 'Class/Product.php';
+/**
+ * Short description for code
+ * php version 7.2.10
+ *
+ * @category Category_Name
+ * @package  PackageName
+ * @author   Abhishek Pandey <author@example.com>
+ * @license  http://www.php.net/license/3_01.txt 
+ * @link     http://pear.php.net/package/PackageName
+ *
+ * This is a "Docblock Comment"
+ */
+require 'Class/User.php';
+require 'Class/Product.php';
 $objUser = new User(); 
 $action = $_POST['action'];
 $objProduct = new Product();
@@ -28,7 +40,7 @@ case 'insert_product(hosting)':
     $name = $_POST['name'];
     $url = $_POST['url'];
     $avail = $_POST['avail'];
-    $query = "INSERT into tbl_product(`prod_name`, `link`, `prod_available`) VALUES ('$name', '$url', '$avail') ";
+    $query = "INSERT into tbl_product(`prod_name`, `html`, `prod_available`) VALUES ('$name', '$url', '$avail') ";
     $data = $objProduct->insert($query);
     if ($data == 1) {
          echo "Product data Inserted Successfully!!";
@@ -52,7 +64,7 @@ case 'update_cat_product':
     $name = $_POST['name'];
     $url = $_POST['url'];
     $avail = $_POST['avail'];
-    $query = "UPDATE tbl_product SET `prod_name`='$name', `link` = '$url', `prod_available`= '$avail' WHERE `id`='$id'" ;
+    $query = "UPDATE tbl_product SET `prod_name`='$name', `html` = '$url', `prod_available`= '$avail' WHERE `id`='$id'" ;
     $data = $objProduct->update($query);
     echo $data;
     break;
@@ -103,5 +115,26 @@ case 'delete_product_details'  :
     WHERE `prod_id`='$id'";
     $data = $objProduct->delete($query);
     echo $data;
+    break;
+case 'edit_product_details' :
+    $id = $_POST['id'];
+    $sql = "SELECT * FROM tbl_product inner join tbl_product_description on tbl_product.id = tbl_product_description.prod_id WHERE prod_id = '$id'";
+    $data = $objProduct->select($sql);
+    print_r($data);
+    break;
+case 'Update_product' :
+    $prod_id = $_POST['prod_id'];
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $url = $_POST['url'];
+    $mprice = $_POST['mprice'];
+    $yprice = $_POST['yprice'];
+    $sku = $_POST['sku'];
+    $data = $_POST['data'];
+    $data_json = json_encode($data);
+    $data = $objProduct->Update_Data_product($id, $name, $url, $mprice, $yprice, $sku, $data_json, $prod_id);
+    echo $data;
+    break;
+    break;
 }
 ?> 
