@@ -58,7 +58,7 @@ require 'header.php';?>
                                     <li><span>Launch  </span> your business with Rs. 2000* Google AdWords Credit *</li>
                                     <li><span>30 day </span> Money Back Guarantee</li>
                                 </ul>
-                                    <a href="#">view plans</a>
+                                    <a href="#myTabContent">view plans</a>
                                 </div>
                                 <div class="col-md-4 linux-grid1">
                                     <img src="images/window.png" class="img-responsive" alt=""/>
@@ -67,7 +67,7 @@ require 'header.php';?>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-prices">
+                    <div class="tab-prices" id="tab-prices-details">
                         <div class="container">
                             <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
                                 <ul id="myTab" class="nav nav-tabs left-tab" role="tablist">

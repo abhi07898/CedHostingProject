@@ -156,7 +156,6 @@ require 'header.php';
                                 data : {action:action, name:name, email:email,contact:contact, password:conf_pass,question:sec_que, answer:sec_ans},
                                 success : function (data) {
                                     if(data==1) {
-                                        var random = Math.random() * (+1111 - +9999) + +100; 
                                         alert("Data Registered Successfully! Hope You Recieved varify mail ");
                                         window.location.href="email.php?email="+email;
                                     }

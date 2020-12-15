@@ -47,7 +47,7 @@
           <div class="card bg-secondary border-0 mb-0">
             <div class="card-header bg-transparent pb-2">
               <div class="text-center">
-                  <button type="button" class="btn btn-primary my-4">Add Products Details..</button>
+                  <button type="button" class="btn btn-outline-primary my-4">Create Product Category ..</button>
               </div>
               <form role="form">
                 <div class="form-group mb-3">
@@ -91,16 +91,18 @@
           </div>
       </div>
       
-        <table class="table  ml-4 mr-4 text-center mt-5 " id="product_cat_detail">
+        <table class="table  ml-4 mr-4 text-center mt-5 table-responsive" id="product_cat_detail">
           <thead>
             <th>ID</th>
-            <th>PRODUCT NAME</th>
+            <th>CATEGORY PARENT</th>
+            <th>SUB-CATEGORY NAME</th>
             <th>Availibility</th>
-            <th>URL</th> 
+            <th>HTML</th> 
+            <th>CATEGORY-LAUNCH-DATE</th> 
             <th>ACTION</th>
           </thead>
           <tbody id='table_result'>
-          
+
           </tbody>
         </table>
    
@@ -149,9 +151,6 @@
           if(prod_name == '') {
             alert('Product name is Required Feild');
             $('#prod_name').focus();
-          // }else if(prod_avail != 0 || prod_avail !=1) {
-          //   alert("please Select Availibility of product");
-          //   $('#prod_avail').focus();
           } else if(!(prod_name.match(letter))){
             alert("Product Name is not in Correct Form");
             $('#prod_name').focus();
@@ -183,8 +182,17 @@
                 data : {action:action},
                 success : function(data) {
                   var html = '';
+                  
                   for(var i=0; i<data.length; i++) {
-                    html+= "<tr><td>"+data[i]['id']+"</td><td>"+data[i]['prod_name']+"</td><td>"+data[i]['prod_available']+"</td><td>"+data[i]['html']+"</td><td><button  class='btn btn-primary edit' data-eid="+data[i]['id']+"  data-toggle='modal' data-target='#edit_cat_product' >EDIT</button><button class='btn btn-primary delete' data-did="+data[i]['id']+" >DELETE</button></td></tr>";
+                    if(data[i]['prod_available'] == 1) {
+                      avail = "Available";
+                    } else {
+                      avail = 'Not Available';
+                    }
+                    if(data[i]['prod_parent_id'] == 1) {
+                      parent_host = 'Hosting';
+                    }
+                    html+= "<tr><td>"+data[i]['id']+"</td><td>"+parent_host+"</td><td>"+data[i]['prod_name']+"</td><td>"+avail+"</td><td>"+data[i]['html']+"</td><td>"+data[i]['prod_launch_date']+"</td><td><button  class='btn btn-primary edit' data-eid="+data[i]['id']+"  data-toggle='modal' data-target='#edit_cat_product' >EDIT</button><button class='btn btn-primary delete' data-did="+data[i]['id']+" >DELETE</button></td></tr>";
                   }
                   $('#table_result').html(html);
                   $('#product_cat_detail').DataTable();

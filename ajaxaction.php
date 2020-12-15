@@ -49,7 +49,7 @@ case 'insert_product(hosting)':
     }
     break;
 case 'Retrive_data_from_tbl_product' :
-    $query = "SELECT * FROM tbl_product WHERE `id`<>1";
+    $query = "SELECT * FROM tbl_product WHERE `prod_parent_id` = 1";
     $data = $objProduct->select($query);
     print_r($data);
     break;
@@ -75,7 +75,7 @@ case 'delete_cat_product' :
     echo $data;
     break;
 case 'menus_dayanamic':
-    $query = "SELECT * FROM tbl_product WHERE `id`<>1 AND `prod_available`=1";
+    $query = "SELECT * FROM tbl_product WHERE `prod_parent_id` = 1 AND `prod_available`=1";
     $data = $objProduct->select($query);
     print_r($data);
     break;
@@ -135,6 +135,21 @@ case 'Update_product' :
     $data = $objProduct->Update_Data_product($id, $name, $url, $mprice, $yprice, $sku, $data_json, $prod_id);
     echo $data;
     break;
+    break;
+
+case 'fetching_dayanamic_data' :
+    $id = $_POST['id'];
+    $sql = "SELECT * FROM tbl_product WHERE `id` = '$id' ";
+    $data = $objProduct->select($sql);
+    print_r($data);
+    break;
+    
+case 'fetching_dayanamic_data_from_both_table':
+    $id = $_POST['id'];
+    $sql = "SELECT * FROM tbl_product inner join tbl_product_description on tbl_product.id = tbl_product_description.prod_id WHERE tbl_product.prod_parent_id = '$id'";
+    $data = $objProduct->select($sql);
+    print_r($data);
+    // echo 'aaaaaaaa ka jaaaaaaaaaaaaaaaa';
     break;
 }
 ?> 

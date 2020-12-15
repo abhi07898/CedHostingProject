@@ -59,7 +59,7 @@ require 'header.php';?>
                                     <li><span>Launch  </span> your business with Rs. 1000* Google AdWords Credit *</li>
                                     <li><span>30 day </span> Money Back Guarantee</li>
                                 </ul>
-                                    <a href="#">view plans</a>
+                                    <a href="#myTabContent">view plans</a>
                                 </div>
                                 <div class="col-md-4 linux-grid1">
                                     <img src="images/cms.png" class="img-responsive" alt=""/>

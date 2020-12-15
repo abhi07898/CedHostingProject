@@ -256,52 +256,42 @@ function check_product_name() {
   } else {
     err_product_name = false;
     $('#product_name_err').html("");
-  }
-  debugger;
+  } 
   validate_error();
 }
 // function for chrck  url
-function chek_page_url() {
-  debugger;
+function chek_page_url() {  
   page_url = $('#page_url').val().trim(); 
-  if(page_url.length=='') {
-    $('#page_url_err').html("URL is a required feild!!!");
-      $('#page_url').focus();
-      err_page_url = true;
-  }
-  else if(!(page_url.match(url))) {
+  if(!(page_url.match(url))) {
       $('#page_url_err').html("URL is not in Proper way!!!");
       $('#page_url').focus();
       err_page_url = true;
   } else {
     err_page_url = false;
     $('#page_url_err').html("");
-  }
-  debugger;
+  } 
   validate_error();
 }
 // function for check monthly_price
 function check_monthly_price () {
   monthly_price = $('#monthly_price').val().trim();
-  if(monthly_price.length == '') {
-    $('#monthly_price_err').html("Monthly Price  is Required!!!");
+  if(monthly_price == '') {
+    $('#monthly_price_err').html("Monthly Price is Required!!!");
     $('#monthly_price').focus();
     err_monthly_price = true;
-  }
-  else if(!(monthly_price.match(/^[0-9]*\.?[0-9]*$/))) {
+  } else if(!(monthly_price.match(/^[0-9]*\.?[0-9]*$/))) {
       $('#monthly_price_err').html("Monthly Price  is not in Proper way!!!");
       $('#monthly_price').focus();
       err_monthly_price = true;
   } else if(monthly_price.length > 15) {
-    $('#monthly_price_err').html("More Then 15 values are not allowed");
+    $('#monthly_price_err').html("More Then 15 digit are not allowed");
     $('#monthly_price').focus();
     err_monthly_price = true;
   } 
   else {
     err_monthly_price = false;
     $('#monthly_price_err').html("");
-  }
-  debugger;
+  } 
   validate_error();
   
 }
@@ -318,14 +308,14 @@ function check_annaul_price() {
       $('#annual_price').focus();
       err_annual_price = true;
   } else if(annual_price.length > 15) {
-    $('#annual_price_err').html("More Then 15 are not allowed");
+    $('#annual_price_err').html("More Then 15 digit are not allowed");
     err_annual_price = true;
     } 
   else {
       $('#annual_price_err').html("");
       err_annual_price = false;
     }
-    debugger;
+    
     validate_error();
 }
 // cehck function for sku validation 
@@ -345,8 +335,7 @@ function check_sku() {
    else {
     $('#sku_err').html("");
     err_sku = false;
-  }
-  debugger;
+  } 
   validate_error();
 }
 // check funciton for web space
@@ -362,7 +351,7 @@ function check_web_space() {
       $('#web_space').focus();
       err_web_space = true;
   } else if(web_space.length > 5)  {
-      $('#web_space_err').html("Length should be less than 5!!!");
+      $('#web_space_err').html("Length should be less than 6!!!");
       $('#web_space').focus();
       err_web_space = true;
   }
@@ -370,8 +359,7 @@ function check_web_space() {
     err_web_space = false;
     $('#web_space_err').html("");
     
-  }
-  debugger;
+  } 
   validate_error();
 }
 // check function for band-width 
@@ -394,8 +382,7 @@ function check_band_width() {
   else {
     err_band_width = false;
     $('#band_width_err').html("");
-  }
-  debugger;
+  } 
   validate_error();
 }
 
@@ -420,8 +407,7 @@ function check_free_domain() {
   else {
     err_free_domain = false;
     $('#free_domain_err').html("");
-  }
-  debugger;
+  } 
   validate_error();
 }
 
@@ -444,8 +430,7 @@ function check_lt_support() {
   } else { 
     err_lt_support = false;
     $('#lt_support_err').html("");
-  }
-  debugger;
+  } 
   validate_error();
 }
 // check function for mail box 
@@ -469,12 +454,10 @@ function check_mail_box() {
    else {
     $('#mail_box_err').html("");
     err_mail_box = false;
-  }
-  debugger;
+  } 
   validate_error();
 }
-function validate_error() {
-  debugger;
+function validate_error() { 
   if(err_product_name == true || err_page_url == true || err_monthly_price == true || err_annual_price == true || err_sku == true || err_web_space == true || err_band_width == true || err_band_width == true || err_free_domain == true || err_lt_support == true || err_mail_box == true) {
     $('#create_new').prop("disabled", true);
   } else {
@@ -507,7 +490,7 @@ function validate_error() {
     check_free_domain();
     check_lt_support();
     check_mail_box();
-    debugger;
+    
     alert(err_product_name);
     if(err_product_name == false && err_page_url == false && err_monthly_price == false && err_annual_price == false && err_sku == false && err_web_space == false && err_band_width == false && err_band_width == false && err_free_domain == false && err_lt_support == false && err_mail_box == false) {  
       features_data = {'Web_Space':web_space, 'Band_Width':band_width,'Free_Domain':free_domain, 'lts':lt_support, 'Mailbox':mail_box};

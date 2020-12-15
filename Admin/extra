@@ -48,3 +48,24 @@
       
     // }
   // });
+
+
+
+
+
+
+
+
+
+
+  <div class="content">
+                    <div class="linux-section">
+                        <div class="container">
+                            <div class="linux-grids">
+                                <div class="col-md-8 linux-grid">
+                                <h2 id='title'></h2>
+                                <div id="dayanamic_data"></div>
+                                <!-- <div class="clearfix"></div> -->
+                            <!-- </div> -->
+                        </div>
+                    </div>

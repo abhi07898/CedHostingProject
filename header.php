@@ -88,7 +88,7 @@
             success : function(data) {
                var html = '';
                for(var i=0; i<data.length; i++) {
-                   html+= '<li><a href='+data[i]['link']+'>'+data[i]['prod_name']+'</a></li>';
+                   html+= '<li><a href="catpage.php?id='+data[i]['id']+'">'+data[i]['prod_name']+'</a></li>';
                }
                $('#dayanamic_menus_hosting').html(html);
             }

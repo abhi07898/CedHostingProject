@@ -18,6 +18,7 @@ require 'admin_header.php';?>
     <?php require 'search_admin.php';?>         
         <table class="table  ml-4 mr-4 text-center table-responsive" id="product_detail">
           <thead>
+          <th>PRODUCT CATEGORY</th>
             <th>PRODUCT NAME</th>
             <th>Availibility</th>
             <th>URL</th> 
@@ -197,10 +198,14 @@ require 'admin_header.php';?>
         data : {action:action},
         success : function(data) {
           var html = '';
-
           for(var i=0; i<data.length; i++) {
+                  if(data[i]['prod_available'] == 1) {
+                    avail = "Available";
+                  } else {  
+                    avail = 'Not Available';
+                  }                
             var disc = jQuery.parseJSON(data[i]['description'])
-            html+= "<tr><td>"+data[i]['prod_name']+"</td><td>"+data[i]['prod_available']+"</td><td>"+data[i]['html']+"</td><td>"+data[i]['prod_launch_date']+"</td><td>"+disc.Web_Space+"</td><td>"+disc.Band_Width+"</td><td>"+disc.Free_Domain+"</td><td>"+disc.lts+"</td><td>"+disc.Mailbox+"</td><td>"+data[i]['mon_price']+"</td><td>"+data[i]['annual_price']+"</td><td>"+data[i]['sku']+"</td><td><button  class='btn btn-outline-primary edit' data-eid="+data[i]['prod_id']+"  data-toggle='modal' data-target='#edit_product' >EDIT</button><button class='btn btn-outline-danger delete' data-did="+data[i]['prod_id']+" >DELETE</button></td></tr>";
+            html+= "<tr><td>"+data[i]['prod_name']+"</td><td>"+data[i]['prod_name']+"</td><td>"+avail+"</td><td>"+data[i]['html']+"</td><td>"+data[i]['prod_launch_date']+"</td><td>"+disc.Web_Space+"</td><td>"+disc.Band_Width+"</td><td>"+disc.Free_Domain+"</td><td>"+disc.lts+"</td><td>"+disc.Mailbox+"</td><td>"+data[i]['mon_price']+"</td><td>"+data[i]['annual_price']+"</td><td>"+data[i]['sku']+"</td><td><button  class='btn btn-outline-primary edit' data-eid="+data[i]['prod_id']+"  data-toggle='modal' data-target='#edit_product' >EDIT</button><button class='btn btn-outline-danger delete' data-did="+data[i]['prod_id']+" >DELETE</button></td></tr>";
           }
           $('#table_result').html(html);
           $('#product_detail').DataTable();
@@ -254,6 +259,7 @@ require 'admin_header.php';?>
         success : function(data) {
           var disc = jQuery.parseJSON(data[0]['description'])
           $('#update_id').val(data[0]['prod_id']);
+          // $('#product_cat').val(data[0]['prod_id']);
           $('#product_name').val(data[0]['prod_name']);
           $('#page_url').val(data[0]['html']);
           $('#monthly_price').val(data[0]['mon_price']);
@@ -347,12 +353,7 @@ function check_product_name() {
 function chek_page_url() {
   
   page_url = $('#page_url').val().trim(); 
-  if(page_url.length=='') {
-    $('#page_url_err').html("URL is a required feild!!!");
-      $('#page_url').focus();
-      err_page_url = true;
-  }
-  else if(!(page_url.match(url))) {
+  if(!(page_url.match(url))) {
       $('#page_url_err').html("URL is not in Proper way!!!");
       $('#page_url').focus();
       err_page_url = true;
@@ -376,7 +377,7 @@ function check_monthly_price () {
       $('#monthly_price').focus();
       err_monthly_price = true;
   } else if(monthly_price.length > 15) {
-    $('#monthly_price_err').html("More Then 15 values are not allowed");
+    $('#monthly_price_err').html("More Then 15 digits values are not allowed");
     $('#monthly_price').focus();
     err_monthly_price = true;
   } 
@@ -425,7 +426,7 @@ function check_sku() {
       $('#sku').focus();
       err_sku = true;
   }
-   else {
+  else {
     $('#sku_err').html("");
     err_sku = false;
   }
