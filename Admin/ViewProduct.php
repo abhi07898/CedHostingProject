@@ -38,6 +38,7 @@ require 'admin_header.php';?>
         </table>
    
     </div>
+    <input type="hidden" id='prod_id'>
   </div>
   <!-- MOdal -->
 <div class="modal fade" id="edit_product" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
@@ -81,11 +82,13 @@ require 'admin_header.php';?>
                   <span id='product_name_err' class = "text-danger"></span>
                 </div>
                 <div class="form-group">
-                <p>Page URL</p>
+                <p>Page HTML</p>
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
+                    <textarea id='page_url'></textarea>
                     </div>
-                    <input class="form-control text-center" placeholder="URL" type="text" id='page_url'>
+                    
+                    <!-- <input class="form-control text-center" placeholder="URL" type="text" id='page_url'> -->
                   </div>
                   <span id='page_url_err' class = "text-danger"></span>
                 </div>
@@ -186,8 +189,15 @@ require 'admin_header.php';?>
   <!-- DataTables CSS -->
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
 <script type="text/javascript" src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-
-  <script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+tinymce.init({
+    selector: 'textarea#page_url',
+    skin: 'bootstrap',
+    plugins: 'lists, link, image, media',
+    toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+    menubar: false
+  });
   $(document).ready(function(){
     function show_product_table() {
       action = "View_product_list";
@@ -198,23 +208,38 @@ require 'admin_header.php';?>
         data : {action:action},
         success : function(data) {
           var html = '';
+          var parent_prod_name;
           for(var i=0; i<data.length; i++) {
                   if(data[i]['prod_available'] == 1) {
                     avail = "Available";
                   } else {  
                     avail = 'Not Available';
-                  }                
-            var disc = jQuery.parseJSON(data[i]['description'])
-            html+= "<tr><td>"+data[i]['prod_name']+"</td><td>"+data[i]['prod_name']+"</td><td>"+avail+"</td><td>"+data[i]['html']+"</td><td>"+data[i]['prod_launch_date']+"</td><td>"+disc.Web_Space+"</td><td>"+disc.Band_Width+"</td><td>"+disc.Free_Domain+"</td><td>"+disc.lts+"</td><td>"+disc.Mailbox+"</td><td>"+data[i]['mon_price']+"</td><td>"+data[i]['annual_price']+"</td><td>"+data[i]['sku']+"</td><td><button  class='btn btn-outline-primary edit' data-eid="+data[i]['prod_id']+"  data-toggle='modal' data-target='#edit_product' >EDIT</button><button class='btn btn-outline-danger delete' data-did="+data[i]['prod_id']+" >DELETE</button></td></tr>";
+                  }     
+            var disc = jQuery.parseJSON(data[i]['description']);
+            html+= "<tr><td class='cat"+i+"'></td><td>"+data[i]['prod_name']+"</td><td>"+avail+"</td><td>"+data[i]['html']+"</td><td>"+data[i]['prod_launch_date']+"</td><td>"+disc.Web_Space+"</td><td>"+disc.Band_Width+"</td><td>"+disc.Free_Domain+"</td><td>"+disc.lts+"</td><td>"+disc.Mailbox+"</td><td>"+data[i]['mon_price']+"</td><td>"+data[i]['annual_price']+"</td><td>"+data[i]['sku']+"</td><td><button  class='btn btn-outline-primary edit' data-eid="+data[i]['prod_id']+"  data-toggle='modal' data-target='#edit_product' >EDIT</button><button class='btn btn-outline-danger delete' data-did="+data[i]['prod_id']+" >DELETE</button></td></tr>";
           }
           $('#table_result').html(html);
-          $('#product_detail').DataTable();
+          $('#product_detail').DataTable();        
         }
       });
     }
     show_product_table();
+    $.ajax({
+      url : '../ajaxaction.php',
+      type : 'post',
+      dataType : 'json',
+      data : {action:"fetch_parent_name"},
+      success : function(data) {
+        for(var i = 0; i<data.length ; i++) {
+          $(".cat"+i).html(data[i]['prod_name']);
+          
+          // alert(data[i]['prod_name']);  
+        }show_product_table();       
+      }
+    });
+   
     $(document).on('click','.delete', function(){
-      if(confirm('Are you suer you  want to deleet it!!!!!')) {
+      if(confirm('Are you sure you  want to deleet it!!!!!')) {
       var id  = $(this).data("did");
       var element = this;
       var action = "delete_product_details";
@@ -353,16 +378,16 @@ function check_product_name() {
 function chek_page_url() {
   
   page_url = $('#page_url').val().trim(); 
-  if(!(page_url.match(url))) {
-      $('#page_url_err').html("URL is not in Proper way!!!");
-      $('#page_url').focus();
-      err_page_url = true;
-  } else {
-    err_page_url = false;
-    $('#page_url_err').html("");
-  }
+  // if(!(page_url.match(url))) {
+  //     $('#page_url_err').html("URL is not in Proper way!!!");
+  //     $('#page_url').focus();
+  //     err_page_url = true;
+  // } else {
+  //   err_page_url = false;
+  //   $('#page_url_err').html("");
+  // }
   
-  validate_error();
+  // validate_error();
 }
 // function for check monthly_price
 function check_monthly_price () {

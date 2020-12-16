@@ -149,7 +149,11 @@ case 'fetching_dayanamic_data_from_both_table':
     $sql = "SELECT * FROM tbl_product inner join tbl_product_description on tbl_product.id = tbl_product_description.prod_id WHERE tbl_product.prod_parent_id = '$id'";
     $data = $objProduct->select($sql);
     print_r($data);
-    // echo 'aaaaaaaa ka jaaaaaaaaaaaaaaaa';
+    break;
+case 'fetch_parent_name' : 
+    // $sql = "SELECT `tbl_product`.*,`tbl_product_description`.* FROM tbl_product JOIN tbl_product_description ON `tbl_product`.`id` = `tbl_product_description`.`prod_id`";
+    $data = $objProduct->ParentProduct();
+    print_r($data);
     break;
 }
 ?> 

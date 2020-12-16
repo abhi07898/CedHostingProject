@@ -71,11 +71,12 @@ require 'admin_header.php';?>
                   <span id='product_name_err' class = "text-danger"></span>
                 </div>
                 <div class="form-group">
-                <p>Page URL</p>
+                <p>Page HTML</p>
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
                     </div>
-                    <input class="form-control text-center" placeholder="URL" type="text" id='page_url'>
+                    <textarea id='page_url'></textarea>
+                    <!-- <input class="form-control text-center" placeholder="URL" type="text" id='page_url'> -->
                   </div>
                   <span id='page_url_err' class = "text-danger"></span>
                 </div>
@@ -169,9 +170,17 @@ require 'admin_header.php';?>
 
       <!-- Footer -->
     <?php require 'footer_admin.php';?>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
+tinymce.init({
+    selector: 'textarea#page_url',
+    skin: 'bootstrap',
+    plugins: 'lists, link, image, media',
+    toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+    menubar: false
+  });
 $(document).ready(function(){
- $('#create_new').prop("disabled", false);
+  $('#create_new').prop("disabled", false);
   var action = "fatched_hosting_category";
   $.ajax({
     url: '../ajaxaction.php',
@@ -202,6 +211,8 @@ $(document).ready(function(){
   var err_free_domain = false;
   var err_lt_support = false;
   var err_mail_box = false;
+  var monthly_price ;
+  var annual_price ;
   
 $('#product_name').focusout(function(){
   check_product_name();
@@ -298,12 +309,15 @@ function check_monthly_price () {
 // function for chgeckl annual price 
 function check_annaul_price() {
   annual_price = $('#annual_price').val().trim();
-  if(annual_price.length == '') {
+  if (parseInt(monthly_price) > parseInt(annual_price)) {
+      $('#annual_price_err').html("Annual Price  should always greater then monthly price!!!");
+      $('#annual_price').focus();
+      err_annual_price = true; 
+  } else if(annual_price.length == '') {
     $('#annual_price_err').html("Annual Price is Required!!!");
     $('#annual_price').focus();
     err_annual_price = true;
-  }
-  else if(!(annual_price.match(/^[0-9]*\.?[0-9]*$/))) {
+  } else if(!(annual_price.match(/^[0-9]*\.?[0-9]*$/))) {
       $('#annual_price_err').html("Annual Price  is not in Proper way!!!");
       $('#annual_price').focus();
       err_annual_price = true;
@@ -314,12 +328,9 @@ function check_annaul_price() {
   else {
       $('#annual_price_err').html("");
       err_annual_price = false;
-    }
-    
+    }    
     validate_error();
 }
-// cehck function for sku validation 
-
 function check_sku() {
   sku = $('#sku').val().trim();
   if(sku.length == '') {

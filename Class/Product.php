@@ -172,6 +172,30 @@ class Product
         }
         return ($output);
     } 
+    public function ParentProduct()
+    {
+        $rows2=array();
+        $sql="SELECT `tbl_product`.*,`tbl_product_description`.* FROM tbl_product JOIN tbl_product_description ON `tbl_product`.`id` = `tbl_product_description`.`prod_id`";
+           $result = $this->data->query($sql);
+        if ($result->num_rows>0) {
+            while ($rows=$result->fetch_assoc()) {
+                $id=$rows['prod_parent_id'];
+                $sql2="SELECT * from tbl_product where `id`=$id";
+                $result2=$this->data->query($sql2);
+                if ($result2->num_rows>0) {
+                    while ($rows1=$result2->fetch_assoc()) {
+                          $rows2[]=$rows1;
+                    }
+                } else {
+                     return "Error: " . $sql . "<br>" . $this->data->error;
+                }
+                
+            }
+            return json_encode($rows2);
+        } else {
+                return "Error: " . $sql . "<br>" . $this->data->error;    
+        }    
+    }   
 }
     
 

@@ -14,6 +14,8 @@
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     echo '<script>var id = '.$_GET["id"].';</script>';
+} else {
+    echo "<script>window.location.href='index.php';</script>";
 }
 ?>
 <!DOCTYPE HTML>
@@ -230,7 +232,7 @@ require 'header.php';?>
                                                         <li><strong>location</strong> : <img src="images/india.png"></li>\
                                                         </ul>\
                                                     </div>\
-                                                    <a href="#">buy now</a>\
+                                                    <a href="cart.php">buy now</a>\
                                                 </div>\
 '                   }
                        $("#dayanamic-contetn-data-price").html(html);
