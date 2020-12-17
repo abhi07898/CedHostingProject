@@ -12,7 +12,33 @@
  * This is a "Docblock Comment"
  */
 if ($menu='cart');
-require 'header.php';?>
+require 'header.php';
+
+if (!isset($_SESSION['cart_data'])) {
+    $_SESSION['cart_data'] = array();
+}
+$cart_data = array();
+$_SESSION['cart_data'] = array();
+if (isset($_GET)) {
+    $name = $_GET['name'];
+    $monthly_price = $_GET['monthly'];
+    $free_domain = $_GET['free_domain'];
+    $annaul_price = $_GET['annaul'];
+    $sku=$_GET['sku'];
+    $mail = $_GET['mail_box'];
+    $web_spaces = $_GET['web_spaces'];
+    $band_width = $_GET['band_width'];
+    $lts=$_GET['lts'];  
+    $cart_data = array('name'=>$name, 'mprice'=>$monthly_price, 'free_domain' => $free_domain, 'annual_price' => $annaul_price, 'sku'=>$sku, 'mail'=>$mail, 'web_space' =>$web_spaces, 'band_width' => $band_width, 'lts' => $lts);
+    array_push($_SESSION['cart_data'], $cart_data);
+    $_SESSION['cart_data'] = array_map("unserialize", array_unique(array_map("serialize", $_SESSION['cart_data'])));
+              
+} else {
+    echo '<script>window.location.href="catpage.php";</script>';
+}
+print_r($_SESSION['cart_data']);
+?>
+
 <!DOCTYPE HTML>
 <html>
 <head>

@@ -21,7 +21,7 @@ require 'admin_header.php';?>
           <th>PRODUCT CATEGORY</th>
             <th>PRODUCT NAME</th>
             <th>Availibility</th>
-            <th>URL</th> 
+            <th>HTML</th> 
             <th>LAUNCH-DATE</th>
             <th>Web_Space</th>
             <th>Band_Width</th>

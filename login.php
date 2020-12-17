@@ -49,7 +49,7 @@ require 'header.php';
 // if(isset($_SESSION['admin'])) {
 // 	echo '<script>window.location.href = "Admin/index.php"</script>';
 // }
-?>	<!---header--->
+?><!---header--->
 
         <!---login--->
             <div class="content">
@@ -77,7 +77,7 @@ require 'header.php';
                                       <a class="forgot" href="#">Forgot Your Password?</a>
                                       <input type="submit" value="Login" id="submit_login">
                                     </form>
-                                </div>	
+                                    </div>
                                 <div class="clearfix"> </div>
                             </div>
                         </div>

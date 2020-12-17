@@ -227,12 +227,12 @@ require 'header.php';?>
                                                         <li><strong>'+data[i]['sku']+'</strong> SKU</li>\
                                                         <li><strong>'+disc.Mailbox+'</strong> Email Accounts</li>\
                                                         <li><strong>'+disc.Web_Space+' </strong> Web Spaces</li>\
-                                                        <li><strong>'+disc.Band_width+'</strong> Bandwidth(GB)</li>\
+                                                        <li><strong>'+disc.Band_Width+'</strong> Bandwidth(GB)</li>\
                                                         <li><strong>'+disc.lts+'</strong> Language/Tech-Support</li>\
                                                         <li><strong>location</strong> : <img src="images/india.png"></li>\
                                                         </ul>\
                                                     </div>\
-                                                    <a href="cart.php">buy now</a>\
+                                                    <a href="cart.php?name='+data[i]['prod_name']+'&monthly='+data[i]['mon_price']+'&free_domain='+disc.Free_Domain+'&annaul='+data[i]['annual_price']+'&sku='+data[i]['sku']+'&mail_box='+disc.Mailbox+'&web_spaces='+disc.Web_Space+'&band_width='+disc.Band_Width+'&lts='+disc.lts+'">Add TO Cart</a>\
                                                 </div>\
 '                   }
                        $("#dayanamic-contetn-data-price").html(html);

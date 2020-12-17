@@ -38,15 +38,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     $(function() {
     $('.team a').Chocolat();
     });
-</script>	
-<script type="text/javascript" src="js/jquery.hoverdir.js"></script>	
+</script>
+<script type="text/javascript" src="js/jquery.hoverdir.js"></script>
                         <script type="text/javascript">
                             $(function() {
                             
                                 $(' #da-thumbs > li ').each( function() { $(this).hoverdir(); } );
 
                             });
-                        </script>						
+                        </script>
 <!--script-->
 </head>
 <body>
