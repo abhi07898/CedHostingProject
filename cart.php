@@ -14,12 +14,9 @@
 if ($menu='cart');
 require 'header.php';
 
-if (!isset($_SESSION['cart_data'])) {
-    $_SESSION['cart_data'] = array();
-}
 $cart_data = array();
-$_SESSION['cart_data'] = array();
-if (isset($_GET)) {
+
+if (isset($_GET['name'])) {
     $name = $_GET['name'];
     $monthly_price = $_GET['monthly'];
     $free_domain = $_GET['free_domain'];
@@ -30,13 +27,13 @@ if (isset($_GET)) {
     $band_width = $_GET['band_width'];
     $lts=$_GET['lts'];  
     $cart_data = array('name'=>$name, 'mprice'=>$monthly_price, 'free_domain' => $free_domain, 'annual_price' => $annaul_price, 'sku'=>$sku, 'mail'=>$mail, 'web_space' =>$web_spaces, 'band_width' => $band_width, 'lts' => $lts);
-    array_push($_SESSION['cart_data'], $cart_data);
-    $_SESSION['cart_data'] = array_map("unserialize", array_unique(array_map("serialize", $_SESSION['cart_data'])));
-              
-} else {
-    echo '<script>window.location.href="catpage.php";</script>';
-}
-print_r($_SESSION['cart_data']);
+    $_SESSION['cart_data'][] = $cart_data;
+    // session_destroy();
+} 
+// else {
+//     echo '<script>window.location.href="catpage.php";</script>';
+// }
+
 ?>
 
 <!DOCTYPE HTML>
@@ -67,5 +64,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--script-->
 </head>
 <body>
+ <table class ='table table-striped'>
+ <thead>
+    <tr>
+        <th>Name</th>
+        <th>Free Domain</th>
+        <th>SKU</th>
+        <th>MailBox</th>
+        <th>Web Spaces</th>
+        <th>Band Width</th>
+        <th>L-T-S</th>
+        <th>ACTION</th>
+    </tr>
+ </thead>
+ <tbody>
+<?php
+foreach ($_SESSION['cart_data'] as $key) {
+    ?>
+        <tr onclick='delete_cart(<?php echo $key;?>)'>
+            <td><?php echo $key['name'];?></td>
+            <td><?php echo $key['free_domain'];?></td>
+            <td><?php echo $key['sku'];?></td>
+            <td><?php echo $key['mail'];?></td>
+            <td><?php echo $key['web_space'];?></td>
+            <td><?php echo $key['band_width'];?></td>
+            <td><?php echo $key['lts'];?></td>
+            <td><button type = "button" class= "btn btn-danger" value="<?php echo $key['name']; ?>">REMOVE</button></td>   
+        </tr>
+<?php } ?>   
+ </tbody>
+ </table>
+ <script>
+ function delete_cart(x) {
+    var index = x.rowIndex;
+    window.location.href = 'cartdelete.php?id='+index;
 
+ }
+
+
+ </script>
 <?php require 'footer.php';?>
